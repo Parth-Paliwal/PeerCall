@@ -2,10 +2,12 @@
   "name": "peercall",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "node server.js",
+    "nodemon": "node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -17,6 +19,8 @@
     "next": "15.3.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
     "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
@@ -27,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "nodemon": "^3.1.10",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.2.9",
     "typescript": "^5"
