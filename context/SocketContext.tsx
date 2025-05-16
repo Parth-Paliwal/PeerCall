@@ -7,7 +7,7 @@ interface iSocketContext {
 
     onlineUsers : SocketUser[] | null;
     handleCall : (user : SocketUser)=> void;
-    
+    ongoingCall : OngoingCall | null;
 }
 
 export const socketContext = createContext<iSocketContext | null>(null);
@@ -111,7 +111,7 @@ export const SocketContextProvider =({children} : {children : React.ReactNode})=
     } , [socket , isConnected , user , onIncomingCall])
 
     return (
-        <socketContext.Provider value={{onlineUsers , handleCall}}>
+        <socketContext.Provider value={{onlineUsers , handleCall , ongoingCall}}>
             {children}
         </socketContext.Provider>
     )
