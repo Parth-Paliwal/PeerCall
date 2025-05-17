@@ -12,7 +12,7 @@ const Navbar = ({ children }: { children?: React.ReactNode }) => {
   const { userId } = useAuth();
 
   return (
-    <div className="sticky top-0 border border-b-primary/10">
+    <div className="sticky top-0 bg-black/40 text-white border-b border-slate-700">
       <Container>
         <div className="flex items-center justify-between">
           <div

@@ -40,7 +40,7 @@ export default function RootLayout({
       >
         <SocketProvider>
 
-        <main className="flex flex-col min-h-screen bg-secondary">
+        <main className="flex flex-col min-h-screen bg-secondary bg-gradient-to-r from-[#0f172a]  to-[#334155]">
           <Navbar/>
           <Container>
               {children}

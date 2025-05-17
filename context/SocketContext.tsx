@@ -1,6 +1,6 @@
 import { OngoingCall, participant, SocketUser } from "@/types";
 import { useUser } from "@clerk/nextjs";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { createContext, useActionState, useCallback, useContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 interface iSocketContext {
@@ -19,12 +19,21 @@ export const SocketContextProvider =({children} : {children : React.ReactNode})=
     const [isConnected , setIsConnected] = useState(false); 
     const [onlineUsers , setOnlineUsers] = useState<SocketUser[] | null>(null);
     const [ongoingCall , setOngoingCall] = useState<OngoingCall | null>(null)
+    // const [localStream , setLocalStream] = useActionState(null);
 
     const currentSocketUser = onlineUsers?.find((onlineUser)=>onlineUser.userId === user?.id);
 
+    const getMediaStream = useCallback(async()=>{
 
-    const handleCall = useCallback((user : SocketUser)=>{
+
+
+    } ,[])
+
+    const handleCall = useCallback(async(user : SocketUser)=>{
         if(!currentSocketUser || !socket)return ;
+
+        const stream = await getMediaStream();
+
         const participant = {
             caller : currentSocketUser,
             receiver : user,
@@ -34,7 +43,7 @@ export const SocketContextProvider =({children} : {children : React.ReactNode})=
             isRinging : false,
         })
 
-        socket?.emit('call' , participant);
+        socket?.emit('callUser' , participant);
 
     } , [socket , currentSocketUser , ongoingCall])
 
@@ -102,10 +111,10 @@ export const SocketContextProvider =({children} : {children : React.ReactNode})=
         
         if(!socket && !isConnected) return ;
 
-        socket?.on('incommingCall' , onIncomingCall);
+        socket?.on('incomingCall' , onIncomingCall);
 
         return ()=>{
-            socket?.off('incommingCall' , onIncomingCall);
+            socket?.off('incomingCall' , onIncomingCall);
         }
 
     } , [socket , isConnected , user , onIncomingCall])
