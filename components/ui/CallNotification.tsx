@@ -6,7 +6,7 @@ import {  HiPhoneArrowUpRight } from "react-icons/hi2";
 import { BsTelephoneFill } from "react-icons/bs";
 
 const CallNotification = () => {
-  const { ongoingCall } = useScoket();
+  const { ongoingCall , handleJoinCall} = useScoket();
 
   if (!ongoingCall || !ongoingCall.isRinging) return null;
 
@@ -21,7 +21,7 @@ const CallNotification = () => {
           </h3>
           <p className=" mb-2 mt-3">Incoming Call.</p>
           <div className="flex gap-16 my-3">
-            <button className="cursor-pointer">
+            <button className="cursor-pointer" onClick={() => {handleJoinCall(ongoingCall)}}>
               <HiPhoneArrowUpRight
                 size={20}
                 className=" w-10 h-10 p-2 bg-emerald-500 rounded-full flex items-center justify-center text-white shadow-[0_0_16px_4px_rgba(16,185,129,0.5)] ring-4 ring-emerald-400/30"
